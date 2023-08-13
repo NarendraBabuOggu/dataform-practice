@@ -1,0 +1,19 @@
+config {
+    type: "view",
+    schema: "stage",
+    description : "Stage table for payments data",
+    columns: {
+        payment_id: "Payment ID",
+        order_id: "Order ID",
+        payment_method: "Payment method used for the Order",
+        amount: "Amount paid for the Order"
+    },
+    tags: ["stage"]
+}
+
+select 
+    id as payment_id, 
+    order_id as order_id, 
+    payment_method as payment_method, 
+    SAFE_CAST(amount AS FLOAT64)/100 as amount
+from ${ ref('payments') }
