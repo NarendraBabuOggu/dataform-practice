@@ -1,0 +1,20 @@
+config {
+    type: "view",
+    schema: "stage",
+    description : "Stage table for customer data",
+    columns: {
+        customer_id: "Customer ID",
+        name: "Full Name of the Customer",
+        first_name: "First Name of the Customer",
+        last_name: "Last Name of the Customer",
+    },
+    tags: ["stage"]
+}
+
+select
+    id as customer_id,
+    CONCAT(first_name, " ", last_name) AS name,
+    first_name,
+    last_name
+
+from ${ ref('customers') }

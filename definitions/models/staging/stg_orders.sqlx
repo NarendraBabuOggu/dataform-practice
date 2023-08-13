@@ -1,0 +1,20 @@
+config {
+    type: "view",
+    schema: "stage",
+    description : "Stage table for order data",
+    columns: {
+        order_id: "Order ID",
+        customer_id: "Customer ID",
+        order_date: "Date when the Order is Placed",
+        status: column_descriptions.order_status
+    },
+    tags: ["stage"]
+}
+
+select
+    id as order_id,
+    user_id as customer_id,
+    SAFE_CAST(order_date AS DATE) AS order_date,
+    status
+
+from ${ ref('orders') }
